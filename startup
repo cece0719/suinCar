@@ -2,4 +2,4 @@
 
 git pull
 ./gradlew build -x test
-java -jar ./build/libs/suinCar-0.0.1-SNAPSHOT.jar
+sudo java -jar ./build/libs/suinCar-0.0.1-SNAPSHOT.jar
