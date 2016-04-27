@@ -29,6 +29,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-freemarker')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.pi4j:pi4j-core:1.0')
 }
 
 
