@@ -5,6 +5,6 @@
     <title>${msg}</title>
 </head>
 <body>
-
+${msg}
 </body>
 </html>
