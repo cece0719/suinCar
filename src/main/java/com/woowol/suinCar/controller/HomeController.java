@@ -1,16 +1,20 @@
 package com.woowol.suinCar.controller;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@EnableAutoConfiguration
-public class TestController {
+public class HomeController {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	@RequestMapping(value = "/")
-	public String test(Model model) {
+	public String home(Model model) {
+		logger.info("hello~!");
 		model.addAttribute("msg", "helloWorld");
-		return "test";
+		return "home";
 	}
 }
