@@ -23,7 +23,7 @@
                         <div data-role="navbar">
                             <ul>
                                 <li><a href="javascript:;" data-icon="check" onclick="call('${one["url"]}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
-                                <li><a href="javascript:;" data-icon="delete" onclick="call('${one["url"]}','off');return false;" <#if !(one["isOn")]>class="ui-btn-active"</#if>>Off</a></li>
+                                <li><a href="javascript:;" data-icon="delete" onclick="call('${one["url"]}','off');return false;" <#if !(one["isOn"])>class="ui-btn-active"</#if>>Off</a></li>
                             </ul>
                         </div><!-- /navbar -->
                     </li>
