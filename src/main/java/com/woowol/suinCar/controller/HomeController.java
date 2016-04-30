@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,13 +24,11 @@ public class HomeController {
 	private List<Map<String, Object>> list= new ArrayList<Map<String, Object>>(){{
 		add(new HashMap<String, Object>(){{
 			put("name", "LED1");
-			put("url", "/led1");
 			put("type", "onOff");
 			put("pin", RaspiPin.GPIO_04);
 		}});
 		add(new HashMap<String, Object>(){{
 			put("name", "LED2");
-			put("url", "/led2");
 			put("type", "onOff");
 			put("pin", RaspiPin.GPIO_01);
 		}});
@@ -52,34 +51,26 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/led1")
-	public synchronized String led1(@RequestParam Map<String, String> params) {
-		final GpioController gpio = GpioFactory.getInstance();
-		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
-		pin.setShutdownOptions(true);
-		if (!StringUtils.isEmpty(params.get("status")) && "on".equals(params.get("status"))) {
-			pin.high();
-		} else {
-			pin.low();
+	@RequestMapping(value = "/call")
+	@ResponseBody
+	public synchronized Map<String, String> call(@RequestParam Map<String, String> params) {
+		int index = Integer.parseInt(params.get("index"));
+		Map<String, Object> one = list.get(index);
+		if ("onOff".equals(one.get("type"))) {
+			GpioController gpio = GpioFactory.getInstance();
+			GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin((Pin) one.get("pin"), (String) one.get("name"));
+			pin.setShutdownOptions(true);
+			if (!StringUtils.isEmpty(params.get("status")) && "on".equals(params.get("status"))) {
+				pin.high();
+			} else {
+				pin.low();
+			}
+			gpio.shutdown();
+			gpio.unprovisionPin(pin);
 		}
-		gpio.shutdown();
-		gpio.unprovisionPin(pin);
-		return "home";
-	}
-
-	@RequestMapping(value = "/led2")
-	public synchronized String led2(@RequestParam Map<String, String> params) {
-		final GpioController gpio = GpioFactory.getInstance();
-		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED");
-		pin.setShutdownOptions(true);
-		if (!StringUtils.isEmpty(params.get("status")) && "on".equals(params.get("status"))) {
-			pin.high();
-		} else {
-			pin.low();
-		}
-		gpio.shutdown();
-		gpio.unprovisionPin(pin);
-		return "home";
+		return new HashMap<String, String>(){{
+			put("rtn", "success");
+		}};
 	}
 }
 

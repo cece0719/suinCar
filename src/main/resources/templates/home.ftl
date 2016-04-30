@@ -15,6 +15,7 @@
     </div><!-- /header -->
 
     <div class="ui-content" role="main">
+        <#assign index=0>
         <#list list as one>
             <#if one["type"] == "onOff">
                 <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
@@ -22,24 +23,26 @@
                     <li class="ui-field-contain">
                         <div data-role="navbar">
                             <ul>
-                                <li><a href="javascript:;" data-icon="check" onclick="call('${one["url"]}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
-                                <li><a href="javascript:;" data-icon="delete" onclick="call('${one["url"]}','off');return false;" <#if !(one["isOn"])>class="ui-btn-active"</#if>>Off</a></li>
+                                <li><a href="javascript:;" data-icon="check" onclick="call('${index}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
+                                <li><a href="javascript:;" data-icon="delete" onclick="call('${index}','off');return false;" <#if !(one["isOn"])>class="ui-btn-active"</#if>>Off</a></li>
                             </ul>
                         </div><!-- /navbar -->
                     </li>
                 </ul>
             </#if>
+            <#assign index=index+1>
         </#list>
     </div><!-- /footer -->
 </div>
 <script>
-    function call(url, status) {
+    function call(index, status) {
         $.ajax({
-            url : url,
+            url : '/call',
             type : 'post',
             dataType: "json",
             async: false,
             data : {
+                'index' : index,
                 'status' : status
             },
             success : function(data) {
