@@ -15,10 +15,10 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String home(Model model) throws InterruptedException {
 		final GpioController gpio = GpioFactory.getInstance();
-		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "MyLED", PinState.HIGH);
+		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "MyLED", PinState.LOW);
 		pin.setShutdownOptions(true, PinState.LOW);
 		Thread.sleep(500);
-		pin.low();
+		pin.high();
 		Thread.sleep(500);
 		pin.toggle();
 		Thread.sleep(500);
