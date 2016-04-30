@@ -38,11 +38,7 @@ public class HomeController {
 	public synchronized String home(Model model) throws InterruptedException {
 		for (Map<String, Object> one : controlList) {
 			GpioPinDigitalOutput pinDigitalOutput = gpio.provisionDigitalOutputPin((Pin) one.get("pin"));
-			pinDigitalOutput.setShutdownOptions(true);
-
 			one.put("isOn", pinDigitalOutput.isHigh());
-
-			gpio.shutdown();
 			gpio.unprovisionPin(pinDigitalOutput);
 		}
 		model.addAttribute("controlList", controlList);
@@ -52,17 +48,11 @@ public class HomeController {
 	@RequestMapping(value = "/call")
 	@ResponseBody
 	public synchronized Map<String, String> call(@RequestParam Map<String, String> params) {
-		int index = Integer.parseInt(params.get("index"));
-		Map<String, Object> one = controlList.get(index);
+		Map<String, Object> one = controlList.get(Integer.parseInt(params.get("index")));
+
 		if ("onOff".equals(one.get("type"))) {
 			GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin((Pin) one.get("pin"));
-			pin.setShutdownOptions(true);
-			if ("on".equals(params.get("status"))) {
-				pin.high();
-			} else {
-				pin.low();
-			}
-			gpio.shutdown();
+			pin.setState("on".equals(params.get("status")));
 			gpio.unprovisionPin(pin);
 		}
 		return new HashMap<String, String>(){{
