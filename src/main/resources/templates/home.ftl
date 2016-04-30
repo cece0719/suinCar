@@ -15,7 +15,7 @@
     </div><!-- /header -->
 
     <div class="ui-content" role="main">
-        <ul data-role="listview" data-inset="true" style="margin:0;">
+        <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
             <li data-role="list-divider">LED</li>
             <li class="ui-field-contain">
                 <div data-role="navbar">
@@ -25,16 +25,9 @@
                     </ul>
                 </div><!-- /navbar -->
             </li>
+        </ul>
+        <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
             <li data-role="list-divider">TEMP1</li>
-            <li class="ui-field-contain">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" data-icon="check">On</a></li>
-                        <li><a href="#" data-icon="delete" class="ui-btn-active">Off</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </li>
-            <li data-role="list-divider">TEMP2</li>
             <li class="ui-field-contain">
                 <div data-role="navbar">
                     <ul>
