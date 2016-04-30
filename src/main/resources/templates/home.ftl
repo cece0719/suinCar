@@ -35,7 +35,7 @@
     </div><!-- /footer -->
 </div>
 <script>
-    function call(index, status) {
+    function call(index, state) {
         $.ajax({
             url : '/call',
             type : 'post',
@@ -43,7 +43,7 @@
             async: false,
             data : {
                 'index' : index,
-                'status' : status
+                'state' : state
             },
             success : function(data) {
             }

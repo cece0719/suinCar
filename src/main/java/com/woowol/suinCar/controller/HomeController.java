@@ -52,7 +52,7 @@ public class HomeController {
 
 		if ("onOff".equals(one.get("type"))) {
 			GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin((Pin) one.get("pin"));
-			pin.setState("on".equals(params.get("status")));
+			pin.setState("on".equals(params.get("state")));
 			gpio.unprovisionPin(pin);
 		}
 		return new HashMap<String, String>(){{
