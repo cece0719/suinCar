@@ -16,9 +16,11 @@ public class HomeController {
 	public synchronized String home(Model model) throws InterruptedException {
 		final GpioController gpio = GpioFactory.getInstance();
 		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
-		pin.setShutdownOptions(true, PinState.LOW);
+		pin.setShutdownOptions(true);
 		Thread.sleep(1000);
 		pin.high();
+		Thread.sleep(1000);
+		pin.toggle();
 		Thread.sleep(1000);
 		pin.toggle();
 		Thread.sleep(1000);
