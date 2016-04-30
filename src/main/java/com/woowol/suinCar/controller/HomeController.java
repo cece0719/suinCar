@@ -39,7 +39,7 @@ public class HomeController {
 		for (Map<String, Object> one : list) {
 			Pin pin = (Pin) one.get("pin");
 			GpioController gpio = GpioFactory.getInstance();
-			GpioPinDigitalOutput pinDigitalOutput = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
+			GpioPinDigitalOutput pinDigitalOutput = gpio.provisionDigitalOutputPin(pin, "MyLED");
 			pinDigitalOutput.setShutdownOptions(true);
 
 			one.put("isOn", pinDigitalOutput.isHigh());
