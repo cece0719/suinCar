@@ -23,10 +23,10 @@
                     <li class="ui-field-contain">
                         <div data-role="navbar">
                             <ul>
-                                <li><a href="javascript:;" data-icon="check" onclick="call('${index}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
-                                <li><a href="javascript:;" data-icon="delete" onclick="call('${index}','off');return false;" <#if !(one["isOn"])>class="ui-btn-active"</#if>>Off</a></li>
+                                <li><a href="#" data-icon="check" onclick="call('${index}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
+                                <li><a href="#" data-icon="delete" onclick="call('${index}','off');return false;" <#if !(one["isOn"])>class="ui-btn-active"</#if>>Off</a></li>
                             </ul>
-                        </div><!-- /navbar -->
+                        </div>
                     </li>
                 </ul>
             </#if>

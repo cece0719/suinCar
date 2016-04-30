@@ -37,15 +37,16 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public synchronized String home(@RequestParam Map<String, String> params, Model model) throws InterruptedException {
 		for (Map<String, Object> one : list) {
-			Pin pin = (Pin) one.get("pin");
-			GpioController gpio = GpioFactory.getInstance();
-			GpioPinDigitalOutput pinDigitalOutput = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
-			pinDigitalOutput.setShutdownOptions(true);
-
-			one.put("isOn", pinDigitalOutput.isHigh());
-
-			gpio.shutdown();
-			gpio.unprovisionPin(pinDigitalOutput);
+//			Pin pin = (Pin) one.get("pin");
+//			GpioController gpio = GpioFactory.getInstance();
+//			GpioPinDigitalOutput pinDigitalOutput = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
+//			pinDigitalOutput.setShutdownOptions(true);
+//
+//			one.put("isOn", pinDigitalOutput.isHigh());
+//
+//			gpio.shutdown();
+//			gpio.unprovisionPin(pinDigitalOutput);
+			one.put("isOn", true);
 		}
 		model.addAttribute("list", list);
 		return "home";
