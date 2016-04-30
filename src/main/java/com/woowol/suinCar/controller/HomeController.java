@@ -13,15 +13,15 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/")
-	public String home(Model model) throws InterruptedException {
+	public synchronized String home(Model model) throws InterruptedException {
 		final GpioController gpio = GpioFactory.getInstance();
-		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED", PinState.LOW);
+		final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "MyLED");
 		pin.setShutdownOptions(true, PinState.LOW);
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		pin.high();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		pin.toggle();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		pin.toggle();
 		gpio.shutdown();
 		gpio.unprovisionPin(pin);
