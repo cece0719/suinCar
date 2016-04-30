@@ -52,6 +52,7 @@
             url : '/' + url,
             type : 'post',
             dataType: "json",
+            async: false,
             data : {
                 'status' : status
             },
