@@ -15,34 +15,27 @@
     </div><!-- /header -->
 
     <div class="ui-content" role="main">
-        <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
-            <li data-role="list-divider">LED</li>
-            <li class="ui-field-contain">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="javascript:;" data-icon="check" onclick="call('led','on');return false;">On</a></li>
-                        <li><a href="javascript:;" data-icon="delete" onclick="call('led','off');return false;" class="ui-btn-active">Off</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </li>
-        </ul>
-        <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
-            <li data-role="list-divider">TEMP1</li>
-            <li class="ui-field-contain">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" data-icon="check">On</a></li>
-                        <li><a href="#" data-icon="delete" class="ui-btn-active">Off</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </li>
-        </ul>
+        <#list list as one>
+            <#if one["type"] == "onOff">
+                <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
+                    <li data-role="list-divider">${one["name"]}</li>
+                    <li class="ui-field-contain">
+                        <div data-role="navbar">
+                            <ul>
+                                <li><a href="javascript:;" data-icon="check" onclick="call('${one["url"]}','on');return false;" <#if one["isOn"]>class="ui-btn-active"</#if>>On</a></li>
+                                <li><a href="javascript:;" data-icon="delete" onclick="call('${one["url"]}','off');return false;" <#if !(one["isOn")]>class="ui-btn-active"</#if>>Off</a></li>
+                            </ul>
+                        </div><!-- /navbar -->
+                    </li>
+                </ul>
+            </#if>
+        </#list>
     </div><!-- /footer -->
 </div>
 <script>
     function call(url, status) {
         $.ajax({
-            url : '/' + url,
+            url : url,
             type : 'post',
             dataType: "json",
             async: false,
