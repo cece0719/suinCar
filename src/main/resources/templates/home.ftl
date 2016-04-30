@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${msg}</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body>
-<a href="/?led=on">led on</a>
-<a href="/?led=off">led off</a>
-${msg}
+현재상태 : ${msg!}
+<br>
+<br>
+<button onclick="location.href='/?led=on'">led on</button>
+<br>
+<button onclick="location.href='/?led=off'">led off</button>
 </body>
 </html>
