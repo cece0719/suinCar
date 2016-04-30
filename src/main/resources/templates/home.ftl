@@ -16,7 +16,7 @@
 
     <div class="ui-content" role="main">
         <#assign index=0>
-        <#list list as one>
+        <#list controlList as one>
             <#if one["type"] == "onOff">
                 <ul data-role="listview" data-inset="true" style="margin:0 0 1em">
                     <li data-role="list-divider">${one["name"]}</li>
