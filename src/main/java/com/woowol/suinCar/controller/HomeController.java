@@ -24,6 +24,7 @@ public class HomeController {
 		Thread.sleep(500);
 		pin.toggle();
 		gpio.shutdown();
+		gpio.unprovisionPin(pin);
 
 		logger.info("hello~!");
 		model.addAttribute("msg", "helloWorld");
