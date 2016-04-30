@@ -5,6 +5,8 @@
     <title>${msg}</title>
 </head>
 <body>
+<a href="/?led=on">led on</a>
+<a href="/?led=off">led off</a>
 ${msg}
 </body>
 </html>
