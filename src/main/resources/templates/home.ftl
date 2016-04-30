@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body>
-현재상태 : ${msg!}
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <br>
-<br>
-<button onclick="location.href='/?led=on'">led on</button>
-<br>
-<button onclick="location.href='/?led=off'">led off</button>
+    <div class="ui-field-contain">
+        <label for="flip-led">LED</label>
+        <select name="flip-led" id="flip-led" data-role="slider" onchange="call(this);">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+        </select>
+    </div>
+<script>
+    function call(e) {
+        $.ajax({
+            url : '/led',
+            type : 'post',
+            dataType: "json",
+            data : {
+                'status' : e.value
+            },
+            success : function(data) {
+            }
+        })
+    }
+</script>
 </body>
 </html>
